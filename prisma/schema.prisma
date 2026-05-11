@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+  // output = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String?
+  role      Role     @default(USER)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  packages  Package[] // if admin creates packages
+  bookings  Booking[]
+}
+
+
+
+
+
+
+
+model Package {
+  id          Int      @id @default(autoincrement())
+
+  title       String
+  shortDesc   String
+  description String
+
+  price       Float
+  category    String
+  capacity    Int
+
+  image       String
+
+  isFeatured  Boolean  @default(false)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  userId      Int?
+  user        User?    @relation(fields: [userId], references: [id])
+
+  bookings    Booking[]
+}
+
+
+
+model Booking {
+  id        Int      @id @default(autoincrement())
+
+  userId    Int
+  packageId Int
+
+  date      DateTime
+  guests    Int
+
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+  package   Package  @relation(fields: [packageId], references: [id])
+}
