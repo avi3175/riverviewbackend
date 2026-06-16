@@ -24,6 +24,7 @@ app.use((0, cors_1.default)({
     origin: [
         "http://localhost:3000",
         "https://your-frontend-domain.vercel.app",
+        "https://riverviewfront.netlify.app"
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
