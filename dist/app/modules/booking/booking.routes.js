@@ -11,7 +11,7 @@ router.post("/", auth_middleware_1.authMiddleware, booking_controller_1.BookingC
 // USER VIEW OWN BOOKINGS
 router.get("/me", auth_middleware_1.authMiddleware, booking_controller_1.BookingController.getUserBookings);
 // ADMIN VIEW ALL BOOKINGS
-router.get("/", auth_middleware_1.authMiddleware, (0, role_middleware_1.roleMiddleware)(["ADMIN"]), booking_controller_1.BookingController.getAllBookings);
+router.get("/", auth_middleware_1.authMiddleware, (0, role_middleware_1.roleMiddleware)(["ADMIN", "MANAGER"]), booking_controller_1.BookingController.getAllBookings);
 // DELETE BOOKING
 router.delete("/:id", auth_middleware_1.authMiddleware, booking_controller_1.BookingController.deleteBooking);
 exports.bookingRoutes = router;

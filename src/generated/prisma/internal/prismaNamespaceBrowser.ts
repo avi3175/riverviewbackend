@@ -53,7 +53,12 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Package: 'Package',
-  Booking: 'Booking'
+  Booking: 'Booking',
+  Testimonial: 'Testimonial',
+  MenuItem: 'MenuItem',
+  Order: 'Order',
+  Service: 'Service',
+  RestaurantBooking: 'RestaurantBooking'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -113,6 +118,73 @@ export const BookingScalarFieldEnum = {
 } as const
 
 export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
+
+
+export const TestimonialScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  image: 'image',
+  writings: 'writings',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TestimonialScalarFieldEnum = (typeof TestimonialScalarFieldEnum)[keyof typeof TestimonialScalarFieldEnum]
+
+
+export const MenuItemScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  price: 'price',
+  availability: 'availability',
+  images: 'images',
+  category: 'category',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MenuItemScalarFieldEnum = (typeof MenuItemScalarFieldEnum)[keyof typeof MenuItemScalarFieldEnum]
+
+
+export const OrderScalarFieldEnum = {
+  id: 'id',
+  quantity: 'quantity',
+  userId: 'userId',
+  menuItemId: 'menuItemId',
+  bookingId: 'bookingId',
+  date: 'date',
+  notes: 'notes',
+  createdAt: 'createdAt'
+} as const
+
+export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
+
+
+export const ServiceScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  image: 'image',
+  availability: 'availability',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ServiceScalarFieldEnum = (typeof ServiceScalarFieldEnum)[keyof typeof ServiceScalarFieldEnum]
+
+
+export const RestaurantBookingScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  date: 'date',
+  time: 'time',
+  guests: 'guests',
+  notes: 'notes',
+  createdAt: 'createdAt'
+} as const
+
+export type RestaurantBookingScalarFieldEnum = (typeof RestaurantBookingScalarFieldEnum)[keyof typeof RestaurantBookingScalarFieldEnum]
 
 
 export const SortOrder = {

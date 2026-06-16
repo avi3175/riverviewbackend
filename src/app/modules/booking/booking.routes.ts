@@ -15,7 +15,7 @@ router.get("/me", authMiddleware, BookingController.getUserBookings);
 router.get(
   "/",
   authMiddleware,
-  roleMiddleware(["ADMIN"]),
+  roleMiddleware(["ADMIN", "MANAGER"]),
   BookingController.getAllBookings
 );
 

@@ -238,6 +238,7 @@ export type BookingWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   package?: Prisma.XOR<Prisma.PackageScalarRelationFilter, Prisma.PackageWhereInput>
+  orders?: Prisma.OrderListRelationFilter
 }
 
 export type BookingOrderByWithRelationInput = {
@@ -249,6 +250,7 @@ export type BookingOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   package?: Prisma.PackageOrderByWithRelationInput
+  orders?: Prisma.OrderOrderByRelationAggregateInput
 }
 
 export type BookingWhereUniqueInput = Prisma.AtLeast<{
@@ -263,6 +265,7 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   package?: Prisma.XOR<Prisma.PackageScalarRelationFilter, Prisma.PackageWhereInput>
+  orders?: Prisma.OrderListRelationFilter
 }, "id">
 
 export type BookingOrderByWithAggregationInput = {
@@ -297,6 +300,7 @@ export type BookingCreateInput = {
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutBookingsInput
   package: Prisma.PackageCreateNestedOneWithoutBookingsInput
+  orders?: Prisma.OrderCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateInput = {
@@ -306,6 +310,7 @@ export type BookingUncheckedCreateInput = {
   date: Date | string
   guests: number
   createdAt?: Date | string
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUpdateInput = {
@@ -314,6 +319,7 @@ export type BookingUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
   package?: Prisma.PackageUpdateOneRequiredWithoutBookingsNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateInput = {
@@ -323,6 +329,7 @@ export type BookingUncheckedUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   guests?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingCreateManyInput = {
@@ -398,6 +405,11 @@ export type BookingSumOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   packageId?: Prisma.SortOrder
   guests?: Prisma.SortOrder
+}
+
+export type BookingScalarRelationFilter = {
+  is?: Prisma.BookingWhereInput
+  isNot?: Prisma.BookingWhereInput
 }
 
 export type BookingCreateNestedManyWithoutUserInput = {
@@ -484,11 +496,26 @@ export type BookingUncheckedUpdateManyWithoutPackageNestedInput = {
   deleteMany?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
 }
 
+export type BookingCreateNestedOneWithoutOrdersInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutOrdersInput, Prisma.BookingUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutOrdersInput
+  connect?: Prisma.BookingWhereUniqueInput
+}
+
+export type BookingUpdateOneRequiredWithoutOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutOrdersInput, Prisma.BookingUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutOrdersInput
+  upsert?: Prisma.BookingUpsertWithoutOrdersInput
+  connect?: Prisma.BookingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BookingUpdateToOneWithWhereWithoutOrdersInput, Prisma.BookingUpdateWithoutOrdersInput>, Prisma.BookingUncheckedUpdateWithoutOrdersInput>
+}
+
 export type BookingCreateWithoutUserInput = {
   date: Date | string
   guests: number
   createdAt?: Date | string
   package: Prisma.PackageCreateNestedOneWithoutBookingsInput
+  orders?: Prisma.OrderCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutUserInput = {
@@ -497,6 +524,7 @@ export type BookingUncheckedCreateWithoutUserInput = {
   date: Date | string
   guests: number
   createdAt?: Date | string
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutUserInput = {
@@ -542,6 +570,7 @@ export type BookingCreateWithoutPackageInput = {
   guests: number
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutBookingsInput
+  orders?: Prisma.OrderCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutPackageInput = {
@@ -550,6 +579,7 @@ export type BookingUncheckedCreateWithoutPackageInput = {
   date: Date | string
   guests: number
   createdAt?: Date | string
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutPackageInput = {
@@ -578,6 +608,56 @@ export type BookingUpdateManyWithWhereWithoutPackageInput = {
   data: Prisma.XOR<Prisma.BookingUpdateManyMutationInput, Prisma.BookingUncheckedUpdateManyWithoutPackageInput>
 }
 
+export type BookingCreateWithoutOrdersInput = {
+  date: Date | string
+  guests: number
+  createdAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutBookingsInput
+  package: Prisma.PackageCreateNestedOneWithoutBookingsInput
+}
+
+export type BookingUncheckedCreateWithoutOrdersInput = {
+  id?: number
+  userId: number
+  packageId: number
+  date: Date | string
+  guests: number
+  createdAt?: Date | string
+}
+
+export type BookingCreateOrConnectWithoutOrdersInput = {
+  where: Prisma.BookingWhereUniqueInput
+  create: Prisma.XOR<Prisma.BookingCreateWithoutOrdersInput, Prisma.BookingUncheckedCreateWithoutOrdersInput>
+}
+
+export type BookingUpsertWithoutOrdersInput = {
+  update: Prisma.XOR<Prisma.BookingUpdateWithoutOrdersInput, Prisma.BookingUncheckedUpdateWithoutOrdersInput>
+  create: Prisma.XOR<Prisma.BookingCreateWithoutOrdersInput, Prisma.BookingUncheckedCreateWithoutOrdersInput>
+  where?: Prisma.BookingWhereInput
+}
+
+export type BookingUpdateToOneWithWhereWithoutOrdersInput = {
+  where?: Prisma.BookingWhereInput
+  data: Prisma.XOR<Prisma.BookingUpdateWithoutOrdersInput, Prisma.BookingUncheckedUpdateWithoutOrdersInput>
+}
+
+export type BookingUpdateWithoutOrdersInput = {
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  guests?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
+  package?: Prisma.PackageUpdateOneRequiredWithoutBookingsNestedInput
+}
+
+export type BookingUncheckedUpdateWithoutOrdersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  packageId?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  guests?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type BookingCreateManyUserInput = {
   id?: number
   packageId: number
@@ -591,6 +671,7 @@ export type BookingUpdateWithoutUserInput = {
   guests?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   package?: Prisma.PackageUpdateOneRequiredWithoutBookingsNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutUserInput = {
@@ -599,6 +680,7 @@ export type BookingUncheckedUpdateWithoutUserInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   guests?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateManyWithoutUserInput = {
@@ -622,6 +704,7 @@ export type BookingUpdateWithoutPackageInput = {
   guests?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutPackageInput = {
@@ -630,6 +713,7 @@ export type BookingUncheckedUpdateWithoutPackageInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   guests?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateManyWithoutPackageInput = {
@@ -641,6 +725,35 @@ export type BookingUncheckedUpdateManyWithoutPackageInput = {
 }
 
 
+/**
+ * Count Type BookingCountOutputType
+ */
+
+export type BookingCountOutputType = {
+  orders: number
+}
+
+export type BookingCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  orders?: boolean | BookingCountOutputTypeCountOrdersArgs
+}
+
+/**
+ * BookingCountOutputType without action
+ */
+export type BookingCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BookingCountOutputType
+   */
+  select?: Prisma.BookingCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * BookingCountOutputType without action
+ */
+export type BookingCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderWhereInput
+}
+
 
 export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -651,6 +764,8 @@ export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   package?: boolean | Prisma.PackageDefaultArgs<ExtArgs>
+  orders?: boolean | Prisma.Booking$ordersArgs<ExtArgs>
+  _count?: boolean | Prisma.BookingCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["booking"]>
 
 export type BookingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -688,6 +803,8 @@ export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   package?: boolean | Prisma.PackageDefaultArgs<ExtArgs>
+  orders?: boolean | Prisma.Booking$ordersArgs<ExtArgs>
+  _count?: boolean | Prisma.BookingCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BookingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -703,6 +820,7 @@ export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     package: Prisma.$PackagePayload<ExtArgs>
+    orders: Prisma.$OrderPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1107,6 +1225,7 @@ export interface Prisma__BookingClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   package<T extends Prisma.PackageDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PackageDefaultArgs<ExtArgs>>): Prisma.Prisma__PackageClient<runtime.Types.Result.GetResult<Prisma.$PackagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  orders<T extends Prisma.Booking$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1540,6 +1659,30 @@ export type BookingDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Bookings to delete.
    */
   limit?: number
+}
+
+/**
+ * Booking.orders
+ */
+export type Booking$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Order
+   */
+  select?: Prisma.OrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Order
+   */
+  omit?: Prisma.OrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderInclude<ExtArgs> | null
+  where?: Prisma.OrderWhereInput
+  orderBy?: Prisma.OrderOrderByWithRelationInput | Prisma.OrderOrderByWithRelationInput[]
+  cursor?: Prisma.OrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[]
 }
 
 /**

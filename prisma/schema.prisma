@@ -5,8 +5,8 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
-  // output = "../src/generated/prisma"
+  // output = "../generated/prisma"
+  output = "../src/generated/prisma"
 }
 
 datasource db {
@@ -16,6 +16,7 @@ datasource db {
 enum Role {
   USER
   ADMIN
+  MANAGER
 }
 
 model User {
@@ -28,15 +29,12 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  packages  Package[] // if admin creates packages
-  bookings  Booking[]
+  packages           Package[]
+  bookings           Booking[]
+  testimonials       Testimonial[]
+  orders             Order[]
+  restaurantBookings RestaurantBooking[]
 }
-
-
-
-
-
-
 
 model Package {
   id          Int      @id @default(autoincrement())
@@ -62,8 +60,6 @@ model Package {
   bookings    Booking[]
 }
 
-
-
 model Booking {
   id        Int      @id @default(autoincrement())
 
@@ -77,4 +73,67 @@ model Booking {
 
   user      User     @relation(fields: [userId], references: [id])
   package   Package  @relation(fields: [packageId], references: [id])
+  orders    Order[]
+}
+
+model Testimonial {
+  id        Int      @id @default(autoincrement())
+  name      String
+  image     String?
+  writings  String
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MenuItem {
+  id          Int      @id @default(autoincrement())
+  name        String
+  price       Float
+  availability Boolean @default(true)
+  images      String[] // Array of Cloudinary URLs
+  category    String?  // e.g. "starter", "main", "dessert", "drink"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  orders      Order[]
+}
+
+model Order {
+  id         Int      @id @default(autoincrement())
+  quantity   Int      @default(1)
+  userId     Int
+  menuItemId Int
+  bookingId  Int      // Must reference a booking to validate date/time
+  date       DateTime // The date for which the order is placed (must match booking date range)
+  notes      String?
+  createdAt  DateTime @default(now())
+
+  user       User     @relation(fields: [userId], references: [id])
+  menuItem   MenuItem @relation(fields: [menuItemId], references: [id])
+  booking    Booking  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, menuItemId, bookingId, date])
+}
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  name        String
+  image       String?
+  availability Boolean @default(true)
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model RestaurantBooking {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  date       DateTime
+  time       String   // e.g. "18:30"
+  guests     Int
+  notes      String?
+  createdAt  DateTime @default(now())
+
+  user       User     @relation(fields: [userId], references: [id])
 }

@@ -48,7 +48,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.BookingScalarFieldEnum = exports.PackageScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
+exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.RestaurantBookingScalarFieldEnum = exports.ServiceScalarFieldEnum = exports.OrderScalarFieldEnum = exports.MenuItemScalarFieldEnum = exports.TestimonialScalarFieldEnum = exports.BookingScalarFieldEnum = exports.PackageScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/index-browser"));
 exports.Decimal = runtime.Decimal;
 exports.NullTypes = {
@@ -77,7 +77,12 @@ exports.AnyNull = runtime.AnyNull;
 exports.ModelName = {
     User: 'User',
     Package: 'Package',
-    Booking: 'Booking'
+    Booking: 'Booking',
+    Testimonial: 'Testimonial',
+    MenuItem: 'MenuItem',
+    Order: 'Order',
+    Service: 'Service',
+    RestaurantBooking: 'RestaurantBooking'
 };
 /*
  * Enums
@@ -117,6 +122,53 @@ exports.BookingScalarFieldEnum = {
     packageId: 'packageId',
     date: 'date',
     guests: 'guests',
+    createdAt: 'createdAt'
+};
+exports.TestimonialScalarFieldEnum = {
+    id: 'id',
+    name: 'name',
+    image: 'image',
+    writings: 'writings',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.MenuItemScalarFieldEnum = {
+    id: 'id',
+    name: 'name',
+    price: 'price',
+    availability: 'availability',
+    images: 'images',
+    category: 'category',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.OrderScalarFieldEnum = {
+    id: 'id',
+    quantity: 'quantity',
+    userId: 'userId',
+    menuItemId: 'menuItemId',
+    bookingId: 'bookingId',
+    date: 'date',
+    notes: 'notes',
+    createdAt: 'createdAt'
+};
+exports.ServiceScalarFieldEnum = {
+    id: 'id',
+    name: 'name',
+    image: 'image',
+    availability: 'availability',
+    description: 'description',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.RestaurantBookingScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    date: 'date',
+    time: 'time',
+    guests: 'guests',
+    notes: 'notes',
     createdAt: 'createdAt'
 };
 exports.SortOrder = {

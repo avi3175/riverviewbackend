@@ -12,7 +12,7 @@ const router = Router();
 router.post(
   "/",
   authMiddleware,
-  roleMiddleware(["ADMIN"]),
+  roleMiddleware(["ADMIN", "MANAGER"]),
   validateRequest(createPackageSchema),
   PackageController.createPackage
 );
@@ -30,7 +30,7 @@ router.get("/:id", PackageController.getSinglePackage);
 router.patch(
   "/:id",
   authMiddleware,
-  roleMiddleware(["ADMIN"]),
+  roleMiddleware(["ADMIN", "MANAGER"]),
   PackageController.updatePackage
 );
 
@@ -38,7 +38,7 @@ router.patch(
 router.delete(
   "/:id",
   authMiddleware,
-  roleMiddleware(["ADMIN"]),
+  roleMiddleware(["ADMIN", "MANAGER"]),
   PackageController.deletePackage
 );
 

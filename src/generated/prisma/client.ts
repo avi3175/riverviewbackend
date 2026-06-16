@@ -54,3 +54,28 @@ export type Package = Prisma.PackageModel
  * 
  */
 export type Booking = Prisma.BookingModel
+/**
+ * Model Testimonial
+ * 
+ */
+export type Testimonial = Prisma.TestimonialModel
+/**
+ * Model MenuItem
+ * 
+ */
+export type MenuItem = Prisma.MenuItemModel
+/**
+ * Model Order
+ * 
+ */
+export type Order = Prisma.OrderModel
+/**
+ * Model Service
+ * 
+ */
+export type Service = Prisma.ServiceModel
+/**
+ * Model RestaurantBooking
+ * 
+ */
+export type RestaurantBooking = Prisma.RestaurantBookingModel
