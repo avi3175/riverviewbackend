@@ -17,12 +17,26 @@ const app = express();
 // app.use(cors());
 
 // Use this configuration:
-app.use(cors({
-  origin: 'http://localhost:3000', // Your Next.js frontend URL
-  credentials: true, // Allow cookies/authorization headers
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+// app.use(cors({
+//   origin: 'http://localhost:3000', // Your Next.js frontend URL
+//   credentials: true, // Allow cookies/authorization headers
+//   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization']
+// }));
+
+
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://your-frontend-domain.vercel.app",
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 
 app.use(express.json());
 
