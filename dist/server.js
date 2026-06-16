@@ -14,11 +14,20 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 // app.use(cors());
 // Use this configuration:
+// app.use(cors({
+//   origin: 'http://localhost:3000', // Your Next.js frontend URL
+//   credentials: true, // Allow cookies/authorization headers
+//   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization']
+// }));
 app.use((0, cors_1.default)({
-    origin: 'http://localhost:3000', // Your Next.js frontend URL
-    credentials: true, // Allow cookies/authorization headers
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    origin: [
+        "http://localhost:3000",
+        "https://your-frontend-domain.vercel.app",
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
 }));
 app.use(express_1.default.json());
 app.use("/api/v1", routes_1.default);
